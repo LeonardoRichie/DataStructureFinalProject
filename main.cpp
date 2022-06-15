@@ -13,8 +13,10 @@ int main()
     int play;
 
     for (int x=1; x<65; x++){
+        //create empty board
         Chess.insertItem(x,"000");
     }
+    //inserting pieces
     Chess.insertItem(1, "WR1");
     Chess.insertItem(2, "WH1");
     Chess.insertItem(3, "WB1");
@@ -51,25 +53,29 @@ int main()
     Chess.printTable();
     cout<<endl;
     cout<<"board:"<<endl;
-    Chess.printBoard();
-    play = true;
-    while(play == true){
+    Chess.printBoard(); //print board
 
-    int x;
+    play = true;
+
+    while(play == true){//while to keep the program running
+    int x; //input key position
     cout<< "Enter key position you want to move: ";
     cin>>x;
 
-    string y;
+    string y; //input value
     cout<< "Enter value from the key: ";
     cin>>y;
 
-    int z;
+    int z; //input destination
     cout<< "Enter key position destination: ";
     cin>>z;
+
     auto start = high_resolution_clock::now(); //starting point
     Chess.insertItem(x, "000");
     Chess.insertItem(z,y);
     auto stop = high_resolution_clock::now(); //end point
+
+    cout<<"board:"<<endl;
     Chess.printBoard();
     //duration cast method
     auto duration = duration_cast<microseconds>(stop - start); //get duration
