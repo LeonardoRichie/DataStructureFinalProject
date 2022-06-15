@@ -9,7 +9,7 @@ class HashTable
     list<pair<int, string>> table[hashBuckets]; //create linear data structure
 
 public:
-
+    //list of function
     int hashFunction(int key);
     void insertItem(int key, string value);
     void printTable();
@@ -24,22 +24,24 @@ int HashTable::hashFunction(int key)
 
 void HashTable::insertItem(int key, string value)
 {
-    int hashValue = hashFunction(key);
+    //inserting value and replace the old value
+    int hashValue = hashFunction(key); //get key
     auto &cell = table[hashValue]; // We grab the cell of the HashMap
-    auto i = begin(cell);   // We make an iterator
-    bool keyExists = false;
-    for (; i != end(cell); i++)
+    auto i = begin(cell);   // We make an iterator at the first element of sequence
+    bool keyExists = false; //false have not found same key
+    for (; i != end(cell); i++) //add i until the end of the sequence
     {
-        // COLLISION
+        // if key is the same
         if (i->first == key)
         {
-            keyExists = true;
+            keyExists = true; //if key is found replace into a new one
             i->second = value;
             break;
         }
     }
 
     if (!keyExists){
+        //directly insert object without calling constructor
         cell.emplace_back(key, value);
     }
 
@@ -47,12 +49,11 @@ void HashTable::insertItem(int key, string value)
 }
 
 void HashTable::printTable()
-{
+{//loop to access hashtable
     for (int i = 0; i < hashBuckets; i++)
     {
-        if (table[i].size() == 0) continue;
-        auto ptr = table[i].begin();
-        for (; ptr != table[i].end(); ptr++){
+        auto ptr = table[i].begin(); //create pointer at the begining
+        for (; ptr != table[i].end(); ptr++){ // until pointer reach the end
             cout << "Key: " << ptr->first << " Value: " << ptr->second << endl;
         }
     }
@@ -61,13 +62,12 @@ void HashTable::printTable()
 
 void HashTable::printBoard(){
     for (int i = 0; i < hashBuckets; i++){
-        if (table[i].size() == 0) continue; //[[],[],[{100,"A+"}],[],[]]
-        auto ptr = table[i].begin();
-        for (; ptr != table[i].end(); ptr++)
-        {
-            cout << ptr->second<< " ";
+        auto ptr = table[i].begin();//create pointer at the begining
+        for (; ptr != table[i].end(); ptr++)// until pointer reach the end
+        {// until pointer reach the end
+            cout << ptr->second<< " "; //print values
         }
-        if (i%8==0){
+        if (i%8==0){//divide into 8 rows
             cout<<endl;
         }
     }
